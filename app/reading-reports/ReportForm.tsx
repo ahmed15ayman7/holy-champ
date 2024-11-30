@@ -1,25 +1,37 @@
+"use client"
 import { useState } from "react";
 
 interface ReportFormProps {
   closeForm: () => void;
 }
 
+interface FormData {
+  readerName: string;
+  hijriDate: string;
+  bookOfTheDay: string;
+  pagesRead: string;
+  missedPages: number;
+  isFinished: "yes" | "no";
+}
+
 const ReportForm = ({ closeForm }: ReportFormProps) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     readerName: "اسم القارئ", // Auto-fill
     hijriDate: "1446-06-10", // Auto-fill (current Hijri date)
     bookOfTheDay: "",
     pagesRead: "",
     missedPages: 5, // Default missed pages
-    isFinished: "no", // default value
+    isFinished: "no", // Default value
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,7 +46,9 @@ const ReportForm = ({ closeForm }: ReportFormProps) => {
         <h2 className="text-xl font-semibold mb-4">إضافة تقرير قرائي</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">تاريخ اليوم الهجري</label>
+            <label className="block text-sm font-medium text-gray-700">
+              تاريخ اليوم الهجري
+            </label>
             <input
               type="text"
               name="hijriDate"
@@ -46,7 +60,9 @@ const ReportForm = ({ closeForm }: ReportFormProps) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">كتاب اليوم</label>
+            <label className="block text-sm font-medium text-gray-700">
+              كتاب اليوم
+            </label>
             <input
               type="text"
               name="bookOfTheDay"
@@ -57,7 +73,9 @@ const ReportForm = ({ closeForm }: ReportFormProps) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">الصفحات المقروءة اليوم</label>
+            <label className="block text-sm font-medium text-gray-700">
+              الصفحات المقروءة اليوم
+            </label>
             <input
               type="number"
               name="pagesRead"
@@ -68,7 +86,9 @@ const ReportForm = ({ closeForm }: ReportFormProps) => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">هل أنهيت الكتاب؟</label>
+            <label className="block text-sm font-medium text-gray-700">
+              هل أنهيت الكتاب؟
+            </label>
             <select
               name="isFinished"
               value={formData.isFinished}
