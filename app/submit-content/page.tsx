@@ -54,7 +54,7 @@ const SubmitContentPage = () => {
           <select
             name="type"
             value={formData.type}
-            onChange={handleChange}
+            // onChange={handleChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           >
             <option value="article">مقالة</option>
