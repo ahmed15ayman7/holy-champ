@@ -1,23 +1,49 @@
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement } from 'chart.js';
+import { VictoryChart, VictoryLine, VictoryAxis, VictoryTooltip, VictoryLegend } from 'victory';
 
-ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement);
+interface ReadingProgressChartProps {
+  data: number[];
+}
 
-const ReadingProgressChart = ({ data }: { data: number[] }) => {
-  const chartData = {
-    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
-    datasets: [
-      {
-        label: 'Pages Read',
-        data,
-        borderColor: 'rgb(75, 192, 192)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        tension: 0.1,
-      },
-    ],
-  };
+const ReadingProgressChart = ({ data }: ReadingProgressChartProps) => {
+  const chartData = [
+    { day: 'Day 1', pagesRead: data[0] },
+    { day: 'Day 2', pagesRead: data[1] },
+    { day: 'Day 3', pagesRead: data[2] },
+    { day: 'Day 4', pagesRead: data[3] },
+    { day: 'Day 5', pagesRead: data[4] },
+  ];
 
-  return <Line data={chartData} />;
+  return (
+    <VictoryChart domainPadding={20}>
+      <VictoryAxis
+        tickValues={['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5']}
+        tickFormat={['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5']}
+      />
+      <VictoryAxis dependentAxis />
+      
+      <VictoryLine
+        data={chartData}
+        x="day"
+        y="pagesRead"
+        style={{
+          data: { stroke: "#4BC0C0", strokeWidth: 3 },
+          labels: { fontSize: 10 },
+        }}
+        labels={({ datum }) => `${datum.pagesRead} pages`}
+        labelComponent={<VictoryTooltip />}
+      />
+      
+      <VictoryLegend
+        x={100}
+        y={50}
+        title="Pages Read"
+        centerTitle
+        orientation="horizontal"
+        gutter={20}
+        style={{ labels: { fontSize: 12, fill: "#1E3A8A" } }}
+      />
+    </VictoryChart>
+  );
 };
 
 export default ReadingProgressChart;

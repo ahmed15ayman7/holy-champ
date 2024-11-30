@@ -1,48 +1,21 @@
 "use client";
 
-import { Line, Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS,ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
-
-// Register components globally
-ChartJS.register(ArcElement, CategoryScale, LinearScale, Tooltip, Legend);
-
-// Registering required chart components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import { VictoryLine, VictoryPie, VictoryChart, VictoryTheme } from "victory";
 
 const PageCompetitions = () => {
   // Sample data for the charts
-  const readingProgressData = {
-    labels: ['اليوم 1', 'اليوم 2', 'اليوم 3', 'اليوم 4', 'اليوم 5'], // Days for the last 5 days
-    datasets: [
-      {
-        label: 'عدد الصفحات المقروءة',
-        data: [20, 35, 50, 30, 40], // Sample pages read per day
-        borderColor: '#4CAF50', // Line color
-        backgroundColor: 'rgba(76, 175, 80, 0.2)',
-        tension: 0.4, // Smooth line
-        fill: true,
-      },
-    ],
-  };
+  const readingProgressData = [
+    { x: "اليوم 1", y: 20 },
+    { x: "اليوم 2", y: 35 },
+    { x: "اليوم 3", y: 50 },
+    { x: "اليوم 4", y: 30 },
+    { x: "اليوم 5", y: 40 },
+  ];
 
-  const readingChallengeData = {
-    labels: ['مجموع الكتب', 'الكتب المقروءة'],
-    datasets: [
-      {
-        data: [20, 5], // Total books in challenge vs books read
-        backgroundColor: ['#4CAF50', '#FFC107'], // Colors for different sections
-        hoverOffset: 4,
-      },
-    ],
-  };
+  const readingChallengeData = [
+    { x: "مجموع الكتب", y: 20 },
+    { x: "الكتب المقروءة", y: 5 },
+  ];
 
   const participantsData = [
     { name: "أحمد", booksRead: 10 },
@@ -65,13 +38,29 @@ const PageCompetitions = () => {
         {/* Left - Reading Challenge Progress */}
         <div className="p-6 bg-white rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold text-[#1E3A8A]">تقدم التحدي القرائي</h2>
-          <Doughnut data={readingChallengeData} />
+          <VictoryPie
+            data={readingChallengeData}
+            colorScale={["#4CAF50", "#FFC107"]}
+            innerRadius={100}
+            labelRadius={120}
+            style={{
+              labels: { fontSize: 16, fill: "#1E3A8A", fontWeight: "bold" },
+            }}
+          />
         </div>
 
         {/* Right - Reading Progress over 5 Days */}
         <div className="p-6 bg-white rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold text-[#1E3A8A]">تقدمك في الأيام الخمسة الماضية</h2>
-          <Line data={readingProgressData} />
+          <VictoryChart theme={VictoryTheme.material}>
+            <VictoryLine
+              data={readingProgressData}
+              style={{
+                data: { stroke: "#4CAF50", strokeWidth: 3 },
+                parent: { border: "1px solid #ccc" },
+              }}
+            />
+          </VictoryChart>
         </div>
       </section>
 
