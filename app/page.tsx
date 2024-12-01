@@ -10,7 +10,7 @@ const LandingPage = () => {
     // Set the page to switch after 3 seconds
     const timer = setTimeout(() => {
       setShowMainPage(true);
-    }, 500);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, []);
@@ -24,7 +24,6 @@ const LandingPage = () => {
       className="w-full h-screen flex items-center justify-center bg-cover bg-center"
       style={{
         backgroundImage: "url('/images/back.svg')", // Path to your background SVG
-        backgroundOpacity: 0.8,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -32,21 +31,16 @@ const LandingPage = () => {
     >
       {/* Spinner Container */}
       <div className="relative w-32 h-32 flex items-center justify-center">
-        {/* Circular Spinner with Linear Gradient and Spinning Effect */}
-        <div className="absolute w-full h-full border-4 border-transparent rounded-full animate-spin"
-          style={{
-            background: "linear-gradient(45deg, #FFD700 25%, transparent 25%)",
-            backgroundSize: "50% 50%",
-            animationDuration: "2s", // Adjust the speed of the spin (2 seconds)
-            animationTimingFunction: "linear",
-          }}
-        ></div>
+        {/* Circular Spinner with Gradient */}
+        <div className="absolute border-8 border-transparent rounded-full w-full h-full animate-spin 
+                        from-[#FFD700] via-[#FF8C00] to-[#FF6347] bg-gradient-to-r">
+        </div>
 
         {/* Logo Image (SVG) */}
         <img
           src="/images/الشعار فقط.svg"  // Path to your logo SVG
           alt="Logo"
-          className="w-16 h-16"
+          className="w-16 h-16 z-10" // Keep the logo size fixed and ensure it's above the spinner
         />
       </div>
     </div>
