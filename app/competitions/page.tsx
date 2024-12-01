@@ -1,5 +1,4 @@
 "use client";
-
 import { VictoryLine, VictoryPie, VictoryChart, VictoryTheme } from "victory";
 
 const PageCompetitions = () => {

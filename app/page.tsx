@@ -1,10 +1,59 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link"; 
+
+const LandingPage = () => {
+  const [showMainPage, setShowMainPage] = useState(false);
+
+  useEffect(() => {
+    // Set the page to switch after 3 seconds
+    const timer = setTimeout(() => {
+      setShowMainPage(true);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showMainPage) {
+    return <MainPage />;
+  }
+
+  return (
+    <div
+      className="w-full h-screen flex items-center justify-center bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/images/back.svg')", // Path to your background SVG
+        backgroundOpacity: 0.8,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      dir="rtl"  // Set the direction to RTL
+    >
+      {/* Spinner Container */}
+      <div className="relative w-32 h-32 flex items-center justify-center">
+        {/* Circular Spinner with Linear Gradient and Spinning Effect */}
+        <div className="absolute w-full h-full border-4 border-transparent rounded-full animate-spin"
+          style={{
+            background: "linear-gradient(45deg, #FFD700 25%, transparent 25%)",
+            backgroundSize: "50% 50%",
+            animationDuration: "2s", // Adjust the speed of the spin (2 seconds)
+            animationTimingFunction: "linear",
+          }}
+        ></div>
+
+        {/* Logo Image (SVG) */}
+        <img
+          src="/images/الشعار فقط.svg"  // Path to your logo SVG
+          alt="Logo"
+          className="w-16 h-16"
+        />
+      </div>
+    </div>
+  );
+};
 
 const MainPage = () => {
-  // Example content for the articles/announcements
   const articles = [
     {
       title: "مقالة عن التحدي القرائي",
@@ -16,11 +65,10 @@ const MainPage = () => {
       content: "غصن الزيتون هو مشروع تطوعي يهدف إلى تعزيز الثقافة القرائية بين الأفراد.",
       link: "/about",
     },
-    // Add more articles as necessary
   ];
 
   return (
-    <div className="max-w-5xl mx-auto mt-12 p-6 bg-[#FAF3E0] rounded-lg shadow-xl">
+    <div className="max-w-5xl mx-auto mt-12 p-6 bg-[#FAF3E0] rounded-lg shadow-xl" dir="rtl">
       {/* Header Section */}
       <header className="text-center mb-12">
         <h1 className="text-4xl font-extrabold text-[#1E3A8A] leading-tight">
@@ -51,9 +99,8 @@ const MainPage = () => {
             href="/admin"
             className="block text-center bg-[#1E3A8A] text-white py-4 px-8 rounded-lg shadow-md hover:bg-[#1A3163] transition-all duration-300 ease-in-out transform hover:scale-105"
           >
-           اداره
+            اداره
           </Link>
-          {/* Add a link to the competitions page */}
           <Link
             href="/competitions"
             className="block text-center bg-[#1E3A8A] text-white py-4 px-8 rounded-lg shadow-md hover:bg-[#1A3163] transition-all duration-300 ease-in-out transform hover:scale-105"
@@ -85,4 +132,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default LandingPage;
