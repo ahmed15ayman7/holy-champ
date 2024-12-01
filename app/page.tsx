@@ -22,11 +22,11 @@ const LandingPage = () => {
   return (
     <div
       className="w-full h-screen flex items-center justify-center bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/images/back.svg')", // Path to your background SVG
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      // style={{
+      //   backgroundImage: "url('/images/back.svg')", // Path to your background SVG
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
       dir="rtl"  // Set the direction to RTL
     >
       {/* Spinner Container */}
