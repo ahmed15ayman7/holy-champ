@@ -10,7 +10,7 @@ const ReadingProgressChart = ({ data }: ReadingProgressChartProps) => {
     { day: 'Day 2', pagesRead: data[1] },
     { day: 'Day 3', pagesRead: data[2] },
     { day: 'Day 4', pagesRead: data[3] },
-    { day: 'Day 5', pagesRead: data[4] },
+    { day: 'Day 50', pagesRead: data[4] },
   ];
 
   return (
