@@ -14,10 +14,10 @@ export interface Book {
 export interface User {
   id?: number; // لأن ID يتم توليده تلقائيًا
   name: string;
-  gender: "ذكر" | "أنثى"; // تحديد القيم المسموح بها فقط
+  gender: string;
   region: string;
   readingChallenge: number; // تحدي القراءة الخاص بالمستخدم
-  role: "user" | "admin";
+  role: string;
   createdAt?: Date; // يتم تحديدها تلقائيًا من قاعدة البيانات
   updatedAt?: Date; // يتم تحديثها تلقائيًا من قاعدة البيانات
 }
