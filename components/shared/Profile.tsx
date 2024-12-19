@@ -103,7 +103,7 @@ const Profile = ({ setisLogin }: { setisLogin?: (id: boolean) => void }) => {
           <Button
             href="/login"
             variant="outlined"
-            className="bg-[#ffffff] hover:bg-[#ffffff90] text-gray-900 font-bold border-gray-900 border shadow-md cursor-pointer"
+            className="bg-[#ffffff]  hover:bg-[#ffffff90] text-gray-900 font-bold border-gray-900 border shadow-md cursor-pointer"
             component={Link}
             onClick={async () => {
               await SignOut();
