@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+import InfintyProvider from "@/components/providers/InfintyProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -30,19 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > <SignedOut>
-      {/* <SignInButton /> */}
-    </SignedOut>
-    <SignedIn>
-      <UserButton />
-    </SignedIn>
-        {children}
-      </body>
-    </html>
-    </ClerkProvider>
+    <InfintyProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {" "}
+
+          {children}
+          <ToastContainer />
+        </body>
+      </html>
+    </InfintyProvider>
   );
 }
